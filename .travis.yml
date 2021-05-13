@@ -1,0 +1,11 @@
+# tell Travis we need super user permissions
+sudo: required
+# tell Travis what services we need to use
+services:
+  - docker
+# tell Travis what to do before deploying/installing/testing/etc
+before_install:
+  - docker build -t 1nc0v3nant/DockedFrontend -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true 1nc0v3nant/DockedFrontend npm run test
