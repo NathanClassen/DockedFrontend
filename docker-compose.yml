@@ -1,0 +1,23 @@
+version: '3'
+services:
+    web:
+        build:
+            # specify the context for the build. 'Where are we looking for the resources required to build the image'?
+            context: .
+            # what Dockerfile are we using to build the image?
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+            #  set the volumes here to avoid having to specify them in a docker run command
+        volumes:
+            - /app/node_modules
+            - .:/app
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        # override starting command as specified in Dockerfile.dev
+        command: ["npm", "run", "test"]
