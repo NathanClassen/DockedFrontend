@@ -8,6 +8,7 @@ RUN npm run build
 
 # a new phase. A phase can only have one FROM clause
 FROM nginx
+EXPOSE 80
 COPY --from=0 /app/build /usr/share/nginx/html
 # I am assuming that the 0 indicates the first phase in the file (zero indexed)
  
